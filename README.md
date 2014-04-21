@@ -28,15 +28,19 @@ You pass with ``-e`` docker option.
 Shell access:
 
 ```
-$ docker.io run --name mysql -p 3306:3306 -i -v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
--v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 \
--e MYSQL_DATABASE=api -e MYSQL_USER=api -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql /bin/bash
+$ docker.io run --name mysql -p 3306:3306 -i \
+-v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
+-v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
+-e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql /bin/bash
 ```
 
 Usage:
 
 ```
-$ docker.io run --name mysql -p 3306:3306 -d -v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
--v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=12345 \
--e MYSQL_DATABASE=api -e MYSQL_USER=api -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql
+$ docker.io run --name mysql -p 3306:3306 -d
+-v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
+-v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
+-e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql
 ```
