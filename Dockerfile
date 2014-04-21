@@ -44,4 +44,4 @@ VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 
 EXPOSE 3306
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/local/bin/pre_mysql"]

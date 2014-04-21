@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
 chown -R mysql:mysql /var/lib/mysql
-chown -R mysql:adm /var/log/mysql
-
 mysql_install_db --user mysql > /dev/null
+
+chown -R mysql:adm /var/log/mysql
 
 rootpw=${MYSQL_ROOT_PASSWORD:-""}
 mydb=${MYSQL_DATABASE:-""}
@@ -11,28 +11,31 @@ myuser=${MYSQL_USER:-""}
 mypass=${MYSQL_PASSWORD:-""}
 mychset=${MYSQL_CHARACTER_SET:-"utf8"}
 mycollate=${MYSQL_COLLATE:-"utf8_bin"}
+myhost=${GRANT_HOSTNAME:-"%"}
 
 tfile=`mktemp`
 if [ ! -f "$tfile" ]; then
         return 1
 fi
 
+# The FLUSH PRIVILEGES here is to disable --skip-grant-tables.
 cat << EOF > $tfile
 USE mysql;
-UPDATE user SET password=PASSWORD("$rootpw") WHERE user='root';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+UPDATE user SET password=PASSWORD("$rootpw") WHERE user='root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'$myhost' WITH GRANT OPTION;
 EOF
 
 if [[ $mydb != "" ]]; then
     echo "CREATE DATABASE IF NOT EXISTS \`$mydb\` CHARACTER SET \`$mychset\` COLLATE \`$mycollate\`;" >> $tfile
 
     if [[ $myuser != "" ]]; then
-        echo "GRANT ALL ON \`$mydb\`.* TO '$myuser'@'%' IDENTIFIED BY '$mypass'; FLUSH PRIVILEGES;" >> $tfile
+        echo "GRANT ALL ON \`$mydb\`.* TO '$myuser'@'$myhost' IDENTIFIED BY '$mypass';" >> $tfile
     fi
 fi
 
-$bootstrap <$tfile
+/usr/sbin/mysqld --bootstrap --user=mysql <$tfile
 retval=$?
 rm -f $tfile
-exit $retval
+
+exec supervisord
