@@ -1,0 +1,38 @@
+#!/bin/bash -e
+
+chown -R mysql:mysql /var/lib/mysql
+chown -R mysql:adm /var/log/mysql
+
+mysql_install_db --user mysql > /dev/null
+
+rootpw=${MYSQL_ROOT_PASSWORD:-""}
+mydb=${MYSQL_DATABASE:-""}
+myuser=${MYSQL_USER:-""}
+mypass=${MYSQL_PASSWORD:-""}
+mychset=${MYSQL_CHARACTER_SET:-"utf8"}
+mycollate=${MYSQL_COLLATE:-"utf8_bin"}
+
+tfile=`mktemp`
+if [ ! -f "$tfile" ]; then
+        return 1
+fi
+
+cat << EOF > $tfile
+USE mysql;
+UPDATE user SET password=PASSWORD("$rootpw") WHERE user='root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
+
+if [[ $mydb != "" ]]; then
+    echo "CREATE DATABASE IF NOT EXISTS \`$mydb\` CHARACTER SET \`$mychset\` COLLATE \`$mycollate\`;" >> $tfile
+
+    if [[ $myuser != "" ]]; then
+        echo "GRANT ALL ON \`$mydb\`.* TO '$myuser'@'%' IDENTIFIED BY '$mypass'; FLUSH PRIVILEGES;" >> $tfile
+    fi
+fi
+
+$bootstrap <$tfile
+retval=$?
+rm -f $tfile
+exit $retval
