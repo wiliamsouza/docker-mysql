@@ -3,9 +3,6 @@ docker-mysql
 
 Docker mysql container template used to create development environment.
 
-It enforces the ``uid`` and ``gid`` from user mysql and it defaults
-to 1000 to avoid problems with docker volume permissions.
-
 To build run:
 
 ```
