@@ -12,8 +12,7 @@ $ docker.io build -t wiliamsouza/mysql .
 Change `wiliamsouza` to your Docker
 [index](https://index.docker.io/u/wiliamsouza/) username.
 
-Environment variable
---------------------
+Environment variable:
 
 You pass with ``-e`` docker option.
 
