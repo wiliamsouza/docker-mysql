@@ -32,8 +32,8 @@ RUN update-rc.d -f mysql disable
 ADD bind.cnf /etc/mysql/conf.d/bind.cnf
 
 # start script
-ADD pre_mysql /usr/local/bin/pre_mysql
-RUN chmod +x /usr/local/bin/pre_mysql
+ADD startup /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/startup
 
 # supervisord
 RUN apt-get install supervisor -y
@@ -44,4 +44,4 @@ VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 
 EXPOSE 3306
 
-CMD ["/usr/local/bin/pre_mysql"]
+CMD ["/usr/local/bin/startup"]
