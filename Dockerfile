@@ -43,7 +43,7 @@ RUN chmod +x /usr/local/bin/startup
 RUN apt-get install supervisor -y
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-VOLUME ["/var/lib/mysql", "/var/log/mysql"]
+VOLUME ["/var/lib/mysql", "/var/log/mysql", "/etc/mysql/conf.d"]
 
 EXPOSE 3306
 

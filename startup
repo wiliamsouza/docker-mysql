@@ -35,7 +35,6 @@ if [[ $mydb != "" ]]; then
 fi
 
 /usr/sbin/mysqld --bootstrap --user=mysql <$tfile
-retval=$?
 rm -f $tfile
 
 exec supervisord
