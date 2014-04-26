@@ -23,7 +23,7 @@ cat << EOF > $tfile
 USE mysql;
 FLUSH PRIVILEGES;
 UPDATE user SET password=PASSWORD("$rootpw") WHERE user='root';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'$myhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'$myhost' IDENTIFIED BY '$rootpw';
 EOF
 
 if [[ $mydb != "" ]]; then

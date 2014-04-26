@@ -1,4 +1,4 @@
-# MySQL container used for local development environment
+# MySQL server generic image
 #
 # Version 0.1.0
 
@@ -17,7 +17,17 @@ RUN dpkg-reconfigure locales
 
 RUN apt-get install -y python-software-properties
 
-RUN dpkg-divert --local --rename --add /sbin/initctl
+# supervisord
+RUN apt-get install supervisor -y
+RUN update-rc.d -f supervisor disable
+
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# start script
+ADD startup /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/startup
+
+CMD ["/usr/local/bin/startup"]
 
 # Environment
 
@@ -33,18 +43,6 @@ RUN apt-get install mysql-server -y
 
 RUN update-rc.d -f mysql disable
 
-ADD bind.cnf /etc/mysql/conf.d/bind.cnf
-
-# start script
-ADD startup /usr/local/bin/startup
-RUN chmod +x /usr/local/bin/startup
-
-# supervisord
-RUN apt-get install supervisor -y
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 VOLUME ["/var/lib/mysql", "/var/log/mysql", "/etc/mysql/conf.d"]
 
 EXPOSE 3306
-
-CMD ["/usr/local/bin/startup"]
