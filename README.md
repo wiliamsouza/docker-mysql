@@ -54,7 +54,7 @@ Shell access:
 ```
 $ docker.io run -p 3306:3306 -i \
 -v `pwd`/volumes/log:/var/log/mysql \
--v `pwd`/volumes/mysql:/var/lib/mysql \
+-v `pwd`/volumes/lib:/var/lib/mysql \
 -v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
 -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql /bin/bash
@@ -68,7 +68,7 @@ Usage:
 ```
 $ docker.io run --name mysql -p 3306:3306 -d \
 -v `pwd`/volumes/log:/var/log/mysql \
--v `pwd`/volumes/mysql:/var/lib/mysql \
+-v `pwd`/volumes/lib:/var/lib/mysql \
 -v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
 -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql
