@@ -13,7 +13,7 @@ You can `pull` a ready to use image from Docker
 $ docker.io pull wiliamsouza/mysql
 ```
 
-Or build form this repository:
+Or build this repository:
 
 ```
 $ git clone https://github.com/wiliamsouza/docker-mysql.git
@@ -26,7 +26,7 @@ Change `wiliamsouza/mysql` to your Docker index username.
 Container
 ---------
 
-This image uses volumes and environment varibles to control the mysql server
+This image uses volumes and environment variables to control the mysql server
 configuration.
 
 Volumes:
@@ -53,23 +53,23 @@ Shell access:
 
 ```
 $ docker.io run -p 3306:3306 -i \
--v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
--v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql \
--v /home/wiliam/devel/docker-mysql/data/conf.d:/etc/mysql/conf.d \
+-v `pwd`/volumes/log:/var/log/mysql \
+-v `pwd`/volumes/mysql:/var/lib/mysql \
+-v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
 -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql /bin/bash
 ```
 
-The command above will start a container and starting a shell. Don't
+The command above will start a container give you a shell. Don't
 forget to start the service running the `startup &` script.
 
 Usage:
 
 ```
 $ docker.io run --name mysql -p 3306:3306 -d \
--v /home/wiliam/devel/docker-mysql/data/log:/var/log/mysql \
--v /home/wiliam/devel/docker-mysql/data/mysql:/var/lib/mysql \
--v /home/wiliam/devel/docker-mysql/data/conf.d:/etc/mysql/conf.d \
+-v `pwd`/volumes/log:/var/log/mysql \
+-v `pwd`/volumes/mysql:/var/lib/mysql \
+-v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
 -e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql
 ```
