@@ -70,8 +70,8 @@ $ docker.io run --name mysql -p 3306:3306 -d \
 -v `pwd`/volumes/log:/var/log/mysql \
 -v `pwd`/volumes/lib:/var/lib/mysql \
 -v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
--e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=api -e MYSQL_USER=api \
--e MYSQL_PASSWORD=12345 -t wiliamsouza/mysql
+-e MYSQL_ROOT_PASSWORD=rootpass -e MYSQL_DATABASE=mydb -e MYSQL_USER=myuser \
+-e MYSQL_PASSWORD=mypass -t wiliamsouza/mysql
 ```
 
 The command above will start a container and return its ID.

@@ -1,0 +1,13 @@
+mysql:
+  image: wiliamsouza/mysql
+  ports:
+    - "3306:3306"
+  volumes:
+    - volumes/log:/var/log/mysql
+    - volumes/lib:/var/lib/mysql
+    - volumes/conf.d:/etc/mysql/conf.d
+  environment:
+    - MYSQL_ROOT_PASSWORD: rootpass
+    - MYSQL_DATABASE: mydb
+    - MYSQL_USER: myuser
+    - MYSQL_PASSWORD: mypass
