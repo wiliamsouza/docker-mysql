@@ -23,6 +23,7 @@ cat << EOF > $tfile
 USE mysql;
 FLUSH PRIVILEGES;
 UPDATE user SET password=PASSWORD("$rootpw") WHERE user='root';
+UPDATE user SET Grant_priv='Y', Super_priv='Y' WHERE User='root';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'$myhost' IDENTIFIED BY '$rootpw';
 EOF
 
