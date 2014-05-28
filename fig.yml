@@ -1,5 +1,5 @@
 mysql:
-  image: wiliamsouza/mysql
+  build: .
   ports:
     - "3306:3306"
   volumes:

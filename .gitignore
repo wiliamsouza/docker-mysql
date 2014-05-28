@@ -1,2 +1,2 @@
-data/mysql/*
-data/log/*
+volumes/lib/*
+volumes/log/*
