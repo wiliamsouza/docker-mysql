@@ -27,10 +27,10 @@ UPDATE user SET Grant_priv='Y', Super_priv='Y' WHERE User='root';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'$myhost' IDENTIFIED BY '$rootpw';
 EOF
 
-if [[ $mydb != "" ]]; then
+if [ $mydb != "" ]; then
     echo "CREATE DATABASE IF NOT EXISTS \`$mydb\` CHARACTER SET \`$mychset\` COLLATE \`$mycollate\`;" >> $tfile
 
-    if [[ $myuser != "" ]]; then
+    if [ $myuser != "" ]; then
         echo "GRANT ALL ON \`$mydb\`.* TO '$myuser'@'$myhost' IDENTIFIED BY '$mypass';" >> $tfile
     fi
 fi
