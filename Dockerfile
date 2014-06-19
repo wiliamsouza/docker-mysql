@@ -2,17 +2,13 @@
 #
 # Version 0.1.0
 
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 
 MAINTAINER Wiliam Souza <wiliamsouza83@gmail.com>
 
 # base
 ENV LANG en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise main restricted universe" > /etc/apt/sources.list
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise-updates main restricted universe" >> /etc/apt/sources.list
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise-security main restricted universe" >> /etc/apt/sources.list
 
 RUN locale-gen en_US en_US.UTF-8
 RUN dpkg-reconfigure locales

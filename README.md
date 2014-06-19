@@ -1,7 +1,7 @@
 docker-mysql
 ------------
 
-Docker mysql server generic image source. This is based on `ubuntu:12.04` image.
+Docker mysql server generic image source. This is based on `ubuntu:14.04` image.
 
 Image
 -----
@@ -10,7 +10,7 @@ You can `pull` a ready to use image from Docker
 [index](https://index.docker.io/u/wiliamsouza/) running:
 
 ```
-$ docker.io pull wiliamsouza/mysql
+$ docker pull wiliamsouza/mysql
 ```
 
 Or build this repository:
@@ -18,7 +18,7 @@ Or build this repository:
 ```
 $ git clone https://github.com/wiliamsouza/docker-mysql.git
 $ cd docker-mysql/
-$ docker.io build -t wiliamsouza/mysql .
+$ docker build -t wiliamsouza/mysql .
 ```
 
 Change `wiliamsouza/mysql` to your Docker index username.
@@ -52,7 +52,7 @@ You pass with `-e` docker option.
 Shell access:
 
 ```
-$ docker.io run -p 3306:3306 -i \
+$ docker run -p 3306:3306 -i \
 -v `pwd`/volumes/log:/var/log/mysql \
 -v `pwd`/volumes/lib:/var/lib/mysql \
 -v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
@@ -66,7 +66,7 @@ forget to start the service running the `startup &` script.
 Usage:
 
 ```
-$ docker.io run --name mysql -p 3306:3306 -d \
+$ docker run --name mysql -p 3306:3306 -d \
 -v `pwd`/volumes/log:/var/log/mysql \
 -v `pwd`/volumes/lib:/var/lib/mysql \
 -v `pwd`/volumes/conf.d:/etc/mysql/conf.d \
